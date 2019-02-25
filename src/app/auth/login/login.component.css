@@ -1,0 +1,16 @@
+/*-------inputs-------*/
+
+.input {
+  font-size: 1.3em;
+}
+
+/*----buttons and checkboxes--------*/
+
+.button-facebook {
+  background-color: #3B5998;
+  color: #FFF;
+}
+
+.button-go {
+  background-color: #4BA3C7;
+}
