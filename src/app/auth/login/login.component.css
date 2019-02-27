@@ -1,16 +1,105 @@
+/*-----Header--------*/
+
+.header {
+  text-align: center;
+  font-size: 2em;
+  font-weight: 700;
+  color: #474747;
+  margin-bottom: 30px;
+}
+
 /*-------inputs-------*/
 
 .input {
   font-size: 1.3em;
 }
 
+.input__form {
+  width: 100%;
+}
+
 /*----buttons and checkboxes--------*/
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.checkbox-forgot {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkbox {
+  margin-bottom: 15px;
+}
+
+.forgot {
+  text-decoration: none;
+  padding-top: 5px;
+}
+
+.button-sign {
+  background-color: #80D8FF;
+  color: #474747;
+  text-transform: uppercase;
+}
+
+.button-sign:hover {
+  color: #000;
+}
+
+.or {
+  margin: 25px 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.or-line {
+  width: 40%;
+}
+
+.or-text {
+  text-transform: uppercase;
+  color: #474747;
+  font-size: 1.2em;
+  font-weight: 700;
+}
 
 .button-facebook {
   background-color: #3B5998;
+  color: #CCC;
+  text-transform: uppercase;
+}
+
+.button-facebook:hover {
   color: #FFF;
 }
 
-.button-go {
-  background-color: #4BA3C7;
+.button-gmail {
+  margin-top: 15px;
+  background-color: #D04E41;
+  color: #CCC;
+  text-transform: uppercase;
 }
+
+.button-gmail:hover {
+  color: #FFF;
+}
+
+.create-account {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-account__link {
+  text-decoration: none;
+}
+
+/*----text settings-----*/
+
+a {
+  color: #1565c0;
+}
+

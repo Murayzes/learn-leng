@@ -1,17 +1,30 @@
+<h2 class="header">Sign In to your account</h2>
+
 <form class="input">
-    <mat-form-field class="input-username">
+    <mat-form-field class="input-username input__form">
         <input class="input-username__item" matInput type="text" placeholder="Login">
     </mat-form-field>
 </form>
 
 <form class="input">
-    <mat-form-field class="input-password">
+    <mat-form-field class="input-password input__form">
         <input class="input-password__item" matInput type="password" placeholder="Password">
     </mat-form-field>
 </form>
 
 <mat-card-actions class="buttons">
-    <mat-checkbox class="checkbox">Show password</mat-checkbox>
-    <button mat-button class="button__item button-go">Go</button>
-    <button mat-button class="button__item button-facebook"><img class="facebook-svg" alt="" src="" />Go Facebook</button>
+    <div class="checkbox-forgot">
+        <mat-checkbox class="checkbox">Remember Me</mat-checkbox>
+        <a class="forgot" href="/">Forgot Password?</a>
+    </div>
+    <button mat-button class="button__item button-sign">Sign in</button>
+    <div class="or">
+        <hr class="or-line"/>
+        <p class="or-text">or</p>
+        <hr class="or-line"/>
+    </div>
+    <button mat-button class="button__item button-facebook"><img class="facebook-svg" alt="" src="" />Sign in with facebook</button>
+    <button mat-button class="button__item button-gmail"><img class="gmail-svg" alt="" src="" />Sign in with gmail</button>
 </mat-card-actions>
+
+<p class="create-account">Don't have an account?<a class="create-account__link" href="/">Create an account</a></p>
