@@ -11,11 +11,17 @@
 /*-------inputs-------*/
 
 .input {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
-.input__form {
+.form-control {
   width: 100%;
+}
+
+.form-help-text {
+  font-style: italic;
+  font-size: .8em;
+  color: red;
 }
 
 /*----buttons and checkboxes--------*/
@@ -32,12 +38,12 @@
 }
 
 .checkbox {
-  margin-bottom: 15px;
+  margin: 15px 0;
 }
 
 .forgot {
   text-decoration: none;
-  padding-top: 5px;
+  align-self: center;
 }
 
 .button-sign {
@@ -48,6 +54,11 @@
 
 .button-sign:hover {
   color: #000;
+}
+
+.button-sign:disabled {
+  color: #47474785;
+  background-color: #CCC;
 }
 
 .or {
