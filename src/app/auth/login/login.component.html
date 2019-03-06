@@ -1,4 +1,12 @@
 <h2 class="header">Sign In to your account</h2>
+
+<div 
+    class="message-error"
+    *ngIf="message.text"
+>
+    {{message.text}}
+</div>
+
 <form
     class="input"
     [formGroup]="form"
