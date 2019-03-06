@@ -8,6 +8,15 @@
   margin-bottom: 30px;
 }
 
+.message-error {
+  display: flex;
+  justify-content: center;
+  color: #FF0000;
+  font-size: 1em;
+  font-style: italic;
+  padding: 5px;
+}
+
 /*-------inputs-------*/
 
 .input {
@@ -21,7 +30,7 @@
 .form-help-text {
   font-style: italic;
   font-size: .8em;
-  color: red;
+  color: #FF9494;
 }
 
 /*----buttons and checkboxes--------*/
