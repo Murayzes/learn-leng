@@ -69,7 +69,7 @@
   color: #47474785;
   background-color: #CCC;
 }
-
+/* 
 .or {
   margin: 25px 0;
   display: flex;
@@ -106,7 +106,7 @@
 
 .button-gmail:hover {
   color: #FFF;
-}
+} */
 
 .create-account {
   display: flex;
