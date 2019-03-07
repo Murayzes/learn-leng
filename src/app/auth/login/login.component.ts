@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { User } from './../../shared/models/user.model';
 import { UsersService } from './../../shared/services/users.service';
 import { Message } from '../../shared/models/message.model';
+import { AuthService } from './../../shared/services/auth.service';
 
 
 @Component({
@@ -17,7 +19,9 @@ export class LoginComponent implements OnInit {
   message: Message;
 
   constructor(
-    private usersService: UsersService
+    private usersService: UsersService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -42,7 +46,10 @@ export class LoginComponent implements OnInit {
       .subscribe((user: User) => {
         if (user) {
           if (user.password === formData.password) {
-            // logic
+            this.message.text = '';
+            window.localStorage.setItem('user', JSON.stringify(user));
+            this.authService.login();
+            // this.router.navigate(['']);
           } else {
             this.showMessage('Wrong password!');
           }
