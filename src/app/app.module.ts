@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersService } from './shared/services/users.service';
+import { AuthService } from './shared/services/auth.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +21,7 @@ import { UsersService } from './shared/services/users.service';
     AppRoutingModule,
     MatMenuModule
   ],
-  providers: [UsersService],
+  providers: [UsersService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
