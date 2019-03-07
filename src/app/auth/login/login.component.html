@@ -71,7 +71,9 @@
             type="submit" 
             mat-button class="button__item button-sign"
             [disabled]="form.invalid"
-        >Sign in</button>
+        >
+            Sign in
+        </button>
 
         <!-- <div class="or">
             <hr class="or-line"/>
@@ -83,5 +85,13 @@
         <button mat-button class="button__item button-gmail"><img class="gmail-svg" alt="" src="" />Sign in with gmail</button> -->
     </mat-card-actions>
 
-    <p class="create-account">Don't have an account?<a class="create-account__link" href="/">Create an account</a></p>
+    <p class="create-account">
+        Don't have an account?
+        <a 
+            class="create-account__link" 
+            [routerLink]="'/registration'"
+        >
+            Create an account
+        </a>
+    </p>
 </form>
