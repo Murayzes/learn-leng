@@ -1,15 +1,45 @@
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+
+import { UsersService } from './../../shared/services/users.service';
+import { User } from './../../shared/models/user.model';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['../auth.component.css']
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor(
+    private usersService: UsersService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'name': new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      'agree': new FormControl(null, [Validators.requiredTrue])
+    });
+  }
+
+  onSubmit() {
+    const{email, name, password} = this.form.value;
+    const user = new User(email, name, password);
+
+    this.usersService.createNewUser(user)
+      .subscribe(() => {
+        this.router.navigate(['/login'], {
+          queryParams: {
+            nowCanLoggin: true
+          }
+        });
+      });
   }
 
 }
