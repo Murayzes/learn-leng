@@ -1,7 +1,7 @@
 <h2 class="header">Sign In to your account</h2>
 
 <div 
-    class="message-error"
+    class="message message-{{ message.type }}"
     *ngIf="message.text"
 >
     {{message.text}}
@@ -54,7 +54,7 @@
             *ngIf="form.get('password').invalid && form.get('password').touched"
         >
             <span *ngIf="form.get('password')['errors']['required']">Password can't by empty.</span>
-            <span *ngIf="form.get('password')['errors']['minlength']">
+            <span *ngIf="form.get('password')['errors']['minlength'] && form.get('password')['errors']['minlength']['requiredLength']">
             Password must be more than 
             {{ form.get('password')['errors']['minlength']['requiredLength'] }} 
             characters. Now {{ form.get('password')['errors']['minlength']['actualLength'] }}.</span>
@@ -62,33 +62,33 @@
     </div>
 
     <mat-card-actions class="buttons">
-        <div class="checkbox-forgot">
+        <div class="checkbox-container">
             <mat-checkbox class="checkbox">Remember Me</mat-checkbox>
             <a class="forgot" href="/">Forgot Password?</a>
         </div>
 
         <button 
             type="submit" 
-            mat-button class="button__item button-sign"
+            mat-button class="button__item button"
             [disabled]="form.invalid"
         >
             Sign in
         </button>
 
-        <!-- <div class="or">
+        <div class="or">
             <hr class="or-line"/>
             <p class="or-text">or</p>
             <hr class="or-line"/>
         </div>
 
         <button mat-button class="button__item button-facebook"><img class="facebook-svg" alt="" src="" />Sign in with facebook</button>
-        <button mat-button class="button__item button-gmail"><img class="gmail-svg" alt="" src="" />Sign in with gmail</button> -->
+        <button mat-button class="button__item button-gmail"><img class="gmail-svg" alt="" src="" />Sign in with gmail</button>
     </mat-card-actions>
 
-    <p class="create-account">
+    <p class="router">
         Don't have an account?
         <a 
-            class="create-account__link" 
+            class="router__link" 
             [routerLink]="'/registration'"
         >
             Create an account
