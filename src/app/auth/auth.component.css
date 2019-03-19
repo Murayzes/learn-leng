@@ -1,4 +1,4 @@
-
+/* -----------main form---------- */
 .authorization {
   margin: 150px auto;
   max-width: 25%;
@@ -16,3 +16,141 @@
   margin: 0 auto;
   padding-top: 20px;  
 }
+
+/*-----Header--------*/
+
+.header {
+  text-align: center;
+  font-size: 2em;
+  font-weight: 700;
+  color: #474747;
+  margin-bottom: 30px;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  font-size: 1em;
+  font-style: italic;
+  padding: 5px;
+}
+
+.message-danger {
+  color: #FF0000;
+}
+
+.message-success{
+  color: #4CAF50;
+}
+
+/*-------inputs-------*/
+
+.form-group {
+  margin: 7px 0;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.input {
+  font-size: 1.2em;
+}
+
+.form-help-text {
+  font-style: italic;
+  font-size: .8em;
+  color: #FF9494;
+}
+
+/*----buttons and checkboxes--------*/
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkbox {
+  margin: 15px 0;
+}
+
+.forgot {
+  text-decoration: none;
+  align-self: center;
+}
+
+.button {
+  background-color: #80D8FF;
+  color: #474747;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  color: #000;
+}
+
+.button:disabled {
+  color: #47474785;
+  background-color: #CCC;
+}
+
+.or {
+  margin: 25px 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.or-line {
+  width: 40%;
+}
+
+.or-text {
+  text-transform: uppercase;
+  color: #474747;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.button-facebook {
+  background-color: #3B5998;
+  color: #CCC;
+  text-transform: uppercase;
+}
+
+.button-facebook:hover {
+  color: #FFF;
+}
+
+.button-gmail {
+  margin-top: 15px;
+  background-color: #D04E41;
+  color: #CCC;
+  text-transform: uppercase;
+}
+
+.button-gmail:hover {
+  color: #FFF;
+}
+
+.router {
+  display: flex;
+  justify-content: space-between;
+}
+
+.router__link {
+  text-decoration: none;
+}
+
+/*----text settings-----*/
+
+a {
+  color: #1565c0;
+}
+
+
