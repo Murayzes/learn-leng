@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { User } from './../../shared/models/user.model';
 import { UsersService } from './../../shared/services/users.service';
@@ -11,7 +11,7 @@ import { AuthService } from './../../shared/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../auth.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -21,19 +21,30 @@ export class LoginComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.message = new Message('dander', '');
+
+    this.message = new Message('danger', '');
+
+    this.route.queryParams
+      .subscribe((params: Params) => {
+        if (params['nowCanLoggin']) {
+          this.showMessage({ text: 'Now you can login', type: 'success' });
+        }
+      });
+
     this.form = new FormGroup ({
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
     });
   }
 
-  private showMessage(text: string, type: string = 'danger') { // login error message method
-    this.message = new Message(type, text);
+  private showMessage(message: Message) { // login message method
+    this.message = message;
+
     window.setTimeout(() => {
       this.message.text = '';
     }, 5000);
@@ -51,10 +62,10 @@ export class LoginComponent implements OnInit {
             this.authService.login();
             // this.router.navigate(['']);
           } else {
-            this.showMessage('Wrong password!');
+            this.showMessage({ text: 'Wrong password!', type: 'danger'});
           }
         } else {
-          this.showMessage('This user does not exist!');
+          this.showMessage({ text: 'This user does not exist!', type: 'danger'});
         }
       });
   }
