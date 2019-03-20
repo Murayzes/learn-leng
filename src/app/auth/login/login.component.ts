@@ -6,6 +6,7 @@ import { User } from './../../shared/models/user.model';
 import { UsersService } from './../../shared/services/users.service';
 import { Message } from '../../shared/models/message.model';
 import { AuthService } from './../../shared/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private usersService: UsersService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit() {
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit {
 
     this.form = new FormGroup ({
       'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
+      'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      'rememberme': new FormControl(null)
     });
   }
 
@@ -57,10 +60,18 @@ export class LoginComponent implements OnInit {
       .subscribe((user: User) => {
         if (user) {
           if (user.password === formData.password) {
-            this.message.text = '';
-            window.localStorage.setItem('user', JSON.stringify(user));
-            this.authService.login();
-            // this.router.navigate(['']);
+              this.cookieService.set('email', formData.email);
+              this.cookieService.set('password', formData.password);
+              this.cookieService.set('remember', formData.rememberme);
+
+              this.message.text = '';
+              this.authService.login();
+              // this.router.navigate(['']);
+              if (this.cookieService.get('remember')) {
+                formData.email = this.cookieService.get('email');
+                formData.password = this.cookieService.get('password');
+                formData.rememberme = this.cookieService.get('remember');
+              }
           } else {
             this.showMessage({ text: 'Wrong password!', type: 'danger'});
           }
