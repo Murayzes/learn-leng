@@ -27,6 +27,7 @@
         >
             <span *ngIf="form.get('email')['errors']['required']">Email can't by empty.</span>
             <span *ngIf="form.get('email')['errors']['email']">Enter a valid email.</span>
+            <span *ngIf="form.get('email')['errors']['forbiddenEmail']">User with such email already exists.</span>
         </span>
 
     </div>
