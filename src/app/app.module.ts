@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersService } from './shared/services/users.service';
 import { AuthService } from './shared/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent
@@ -21,7 +22,7 @@ import { AuthService } from './shared/services/auth.service';
     AppRoutingModule,
     MatMenuModule
   ],
-  providers: [UsersService, AuthService],
+  providers: [UsersService, AuthService, CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
