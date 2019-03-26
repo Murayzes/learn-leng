@@ -53,6 +53,14 @@ export class LoginComponent implements OnInit {
     }, 5000);
   }
 
+  // onRemember() {                                                        // If remember on cookie = true
+  //   if (this.cookieService.get('remember')) {                           // then set cookie dates on inputs
+  //     this.form.value.email = this.cookieService.get('email');
+  //     this.form.value.password = this.cookieService.get('password');
+  //     this.form.value.rememberme = this.cookieService.get('remember');
+  //   }
+  // }
+
   onSubmit () {
     const formData = this.form.value;
 
@@ -60,18 +68,18 @@ export class LoginComponent implements OnInit {
       .subscribe((user: User) => {
         if (user) {
           if (user.password === formData.password) {
-              this.cookieService.set('email', formData.email);
+            if (formData.rememberme) {                            // If rememberme = true
+              this.cookieService.set('email', formData.email);    // then save date(email, password, remember) on cookie
               this.cookieService.set('password', formData.password);
               this.cookieService.set('remember', formData.rememberme);
+            } else {
+              this.cookieService.delete('email');
+              this.cookieService.delete('password');
+            }
 
               this.message.text = '';
               this.authService.login();
               // this.router.navigate(['']);
-              if (this.cookieService.get('remember')) {
-                formData.email = this.cookieService.get('email');
-                formData.password = this.cookieService.get('password');
-                formData.rememberme = this.cookieService.get('remember');
-              }
           } else {
             this.showMessage({ text: 'Wrong password!', type: 'danger'});
           }
