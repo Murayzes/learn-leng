@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
@@ -25,6 +26,7 @@ import { SharedModule } from '../shared/shared.module';
     MatCheckboxModule,
     MatInputModule,
     MatCardModule,
+    MatMenuModule,
     SharedModule
   ]
 })

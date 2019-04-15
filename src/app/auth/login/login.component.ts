@@ -1,13 +1,10 @@
+import { SystemComponent } from './../../system/system.component';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
-import { User } from './../../shared/models/user.model';
-import { UsersService } from './../../shared/services/users.service';
-import { Message } from '../../shared/models/message.model';
-import { AuthService } from './../../shared/services/auth.service';
-import { CookieService } from 'ngx-cookie-service';
-
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,76 +14,53 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
-  message: Message;
+  error = '';
+  returnUrl: string;
+  submitted = false;
 
   constructor(
-    private usersService: UsersService,
-    private authService: AuthService,
-    private router: Router,
     private route: ActivatedRoute,
-    private cookieService: CookieService
-  ) {}
+    private router: Router,
+    private authService: AuthService,
+  ) {
+    // redirect to home if already logged in
+    // if (this.authService.currUserValue) {
+    //   this.router.navigate(['/system']);
+    // }
+  }
 
   ngOnInit() {
-
-    this.message = new Message('danger', '');
-
-    this.route.queryParams
-      .subscribe((params: Params) => {
-        if (params['nowCanLoggin']) {
-          this.showMessage({ text: 'Now you can login', type: 'success' });
-        }
-      });
-
-    this.form = new FormGroup ({
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      'rememberme': new FormControl(null)
+    this.form = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
     });
+    // reset login status
+    this.authService.logout();
+
   }
 
-  private showMessage(message: Message) { // login message method
-    this.message = message;
+  onSubmit() {
+    this.submitted = true;
 
-    window.setTimeout(() => {
-      this.message.text = '';
-    }, 5000);
-  }
-
-  // onRemember() {                                                        // If remember on cookie = true
-  //   if (this.cookieService.get('remember')) {                           // then set cookie dates on inputs
-  //     this.form.value.email = this.cookieService.get('email');
-  //     this.form.value.password = this.cookieService.get('password');
-  //     this.form.value.rememberme = this.cookieService.get('remember');
-  //   }
-  // }
-
-  onSubmit () {
     const formData = this.form.value;
 
-    this.usersService.getUserByEmail(formData.email)
-      .subscribe((user: User) => {
-        if (user) {
-          if (user.password === formData.password) {
-            if (formData.rememberme) {                            // If rememberme = true
-              this.cookieService.set('email', formData.email);    // then save date(email, password, remember) on cookie
-              this.cookieService.set('password', formData.password);
-              this.cookieService.set('remember', formData.rememberme);
-            } else {
-              this.cookieService.delete('email');
-              this.cookieService.delete('password');
-            }
+    if (this.form.invalid) {
+      return;
+    }
 
-              this.message.text = '';
-              this.authService.login();
-              // this.router.navigate(['']);
-          } else {
-            this.showMessage({ text: 'Wrong password!', type: 'danger'});
+    this.authService.login(formData.email, formData.password)
+    .pipe(first())
+    .subscribe(
+        data => {
+          this.router.navigate(['/system']);
+        },
+        // error message
+        error => {
+            this.error = error;
+            window.setTimeout(() => {
+              this.error = '';
+            }, 5000);
           }
-        } else {
-          this.showMessage({ text: 'This user does not exist!', type: 'danger'});
-        }
-      });
+    );
   }
-
 }

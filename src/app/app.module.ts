@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { AuthModule } from './auth/auth.module';
-import { AppRoutingModule } from './app-routing.module';
+import { appRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UsersService } from './shared/services/users.service';
 import { AuthService } from './shared/services/auth.service';
+import { SystemModule } from './system/system.module';
+import { ErrorInterceptor } from './shared/helpers/error.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
@@ -19,10 +20,15 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserAnimationsModule,
     HttpClientModule,
     AuthModule,
-    AppRoutingModule,
-    MatMenuModule
+    appRoutingModule,
+    SystemModule,
+    MatMenuModule,
   ],
-  providers: [UsersService, AuthService, CookieService],
+  providers: [
+    AuthService,
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
