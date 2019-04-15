@@ -1,0 +1,107 @@
+<mat-card class="header">
+
+	<div class="burger">
+		<button 
+		mat-fab  
+		(click)="sidenav.toggle()"
+		class="burger-button">
+		</button>
+	</div>
+
+	<div class="logo">
+		<a class="logo-title" [routerLink]="'/videoplayer'"><h2>Lern Leng</h2></a>
+	</div>
+
+	<div 
+	class="search"
+	[formGroup]="form"
+    (ngSubmit)="onSubmit()"
+	>
+	
+	<div 
+	class="search-input-container"
+	[ngClass]="{'has-error': form.get('id').touched}"
+	>
+
+		<mat-form-field 
+		class="search-input"
+		>
+			<input
+			matInput
+			class="search-input__item"
+			type="url"
+			placeholder="Pleace, input URL"
+			formControlName="id"
+			>
+		</mat-form-field>
+
+	</div>
+
+		<button 
+		mat-fab 
+		class="search-button"
+		type="submit"
+		>
+		</button>
+
+	</div>
+
+	<div class="user-data">
+		<h3 class="user-name">Admin</h3>
+		<img class="user-avatar" src="../../assets/images/avatar.png" alt="user-avatar">
+	</div>
+
+	<a class="logout" (click)="logout()">
+		logout
+	</a>
+
+</mat-card>
+
+<mat-sidenav-container class="main-content">
+
+	<mat-sidenav
+	class="article"
+	#sidenav
+	mode="side" 
+	[(opened)]="opened"
+	>
+	<div class="menu-list">
+			<a 
+			[routerLink]="'/videoplayer'"
+			class="menu-item"
+			>
+				<img class="menu-item__img" src="../../assets/images/videoplayer_24px.svg" alt="Videoplayer-image">
+				Videoplayer
+			</a>
+			<a 
+			[routerLink]="'/dictionary'"
+			class="menu-item"
+			>
+				<img class="menu-item__img" src="../../assets/images/round-format_list_24px.svg" alt="Dictionary-image">
+				Dictionary
+			</a>
+			<a 
+			[routerLink]="'/history'"
+			class="menu-item"
+			>
+				<img class="menu-item__img" src="../../assets/images/round-history-24px.svg" alt="History-image">
+				History
+			</a>
+			<a 
+			[routerLink]="'/aboutus'"
+			class="menu-item"
+			>
+				<img class="menu-item__img" src="../../assets/images/round-contacts-24px.svg" alt="AboutUs-image">
+				About Us
+			</a>
+		</div>
+
+	</mat-sidenav>
+	
+	<mat-sidenav-content
+	class="aside"
+	>
+		<router-outlet></router-outlet>
+	</mat-sidenav-content>
+
+</mat-sidenav-container>

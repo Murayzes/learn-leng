@@ -1,7 +1,7 @@
 <h2 class="header">Create an account</h2>
 
 <form 
-    class="input"
+    class="form"
     [formGroup]="form"
     (ngSubmit)="onSubmit()"
 >
@@ -83,24 +83,27 @@
 
     </div>
 
-    <mat-card-actions class="buttons">
-        <div
-            class="checkbox-container"
-            [ngClass]="{'has-error': form.get('agree').invalid && form.get('agree').touched}"
+    <div
+        class="checkbox-container form-group"
+        [ngClass]="{'has-error': form.get('agree').invalid && form.get('agree').touched}"
+    >
+        <mat-checkbox
+            class="checkbox"
+            id="agree"
+            color="primary"
+            type="checkbox"
+            formControlName="agree"
         >
-            <mat-checkbox
-                class="checkbox"
-                id="agree"
-                type="checkbox"
-                formControlName="agree"
-            >
-                I agree
-            </mat-checkbox>
-        </div>
+            I agree
+        </mat-checkbox>
+    </div>
+
+    <mat-card-actions class="buttons form-group">
 
         <button
             type="submit"
-            mat-button
+            color="primary"
+            mat-raised-button
             class="button__item button"
             [disabled]="form.invalid"
         >
@@ -109,7 +112,7 @@
 
     </mat-card-actions>
 
-    <p class="router">
+    <p class="router form-group">
         You have account?
         <a 
             class="router__link" 
