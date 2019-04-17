@@ -1,7 +1,8 @@
 .header {
+  display: block;
   background-color: #FFAB91;
   display: flex;
-  flex-wrap: nowrap;
+  max-width: 100%;
   justify-content: space-between;
 }
 
@@ -40,10 +41,10 @@
 }
 
 .search {
- flex-grow: 2;
- display: flex;
- justify-content: center;
- align-items: center;
+  flex-grow: 2.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-input-container {
@@ -66,15 +67,14 @@
 
 .user-data {
   display: flex;
-  flex-grow: 1;
+  flex-grow: .3;
   flex-direction: row;
   align-self: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .user-name {
   align-self: center;
-  margin-right: 1.5em;
   font-size: 1.5em;
   color: #474747;
 }
@@ -82,22 +82,20 @@
 .user-avatar {
   align-self: center;
   border-radius: 50%;
-  width:70px;
-  height: 70px;
+  max-width: 60px;
   background-size: cover;
   background-position: 50% 50%;
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
 .logout {
-  display: flex;
   align-self: center;
-  flex-grow: .2;
   text-decoration: none;
   font-size: 1.2em;
   font-weight: 500;
   color: #474747;
 }
+
 
 .logout:hover {
   color: #3F51B5;
@@ -105,11 +103,11 @@
 
 .main-content {
   width: 100%;
-  height: 850px;
+  height: 86vh;
 }
 
 .article {
-  width: 15%;
+  width: 18em;
   background-color: rgb(251, 208, 195);
   border-top: 1px solid #47474757;
 }
@@ -143,3 +141,14 @@
   background-color: #ECEFF1;
 }
 
+@media screen and (max-width: 900px) {
+  .logo, .user-name {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .user-avatar {
+    display: none;
+  }
+}

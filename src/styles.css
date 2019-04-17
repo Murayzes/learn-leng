@@ -26,13 +26,11 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-  width: 1920px;
+	max-width: 100%;
   line-height: 1;
   background-color: #ECEFF1;
 }
 ol, ul {
 	list-style: none;
 }
-blockquote, q {
-	quotes: none;
-}
+

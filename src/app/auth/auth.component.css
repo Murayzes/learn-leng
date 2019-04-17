@@ -1,7 +1,9 @@
 /* -----------main form---------- */
 .authorization {
-  margin: 150px auto;
+  margin: 0 auto;
+  margin-top: 10%;
   max-width: 25%;
+  min-width: 18em;
   display: flex;
   flex-direction: column;
   background-color: #FFAB91;
@@ -9,7 +11,7 @@
 
 .content {
   width: 75%;
-  padding: 50px;
+  padding: 10%;
 }
 
 .logo {
