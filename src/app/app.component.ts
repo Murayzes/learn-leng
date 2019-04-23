@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from './shared/services/auth.service';
-import { User } from './shared/models/user.model';
+import { AuthService } from './_services/auth.service';
+import { User } from './_models/user';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +10,13 @@ import { User } from './shared/models/user.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  currUser: User;
+  currentUser: User;
 
   constructor(
       private router: Router,
       private authService: AuthService
   ) {
-      this.authService.currUser.subscribe(x => this.currUser = x);
+      this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   logout() {
@@ -24,4 +24,3 @@ export class AppComponent {
       this.router.navigate(['/login']);
   }
 }
-

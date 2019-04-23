@@ -2,20 +2,16 @@
 
 <form
     class="form"
-    [formGroup]="form"
+    [formGroup]="loginForm"
     (ngSubmit)="onSubmit()"
-    >
+>
 
-    <div
-        class="message"
-        *ngIf="error"
-    >
-        Wrong login or password!
-    </div>
+    <app-alert class="message"></app-alert>
+
 
     <div 
         class="form-group"
-        [ngClass]="{'has-error': form.get('email').invalid && form.get('email').touched}"
+        [ngClass]="{'has-error': loginForm.get('email').invalid && loginForm.get('email').touched && email.errors}"
     >
         <mat-form-field class="form-control">
             <input 
@@ -29,16 +25,16 @@
 
         <span
             class="form-help-text"
-            *ngIf="form.get('email').invalid && form.get('email').touched"
+            *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
         >
-            <span *ngIf="form.get('email')['errors']['required']">Email can't by empty.</span>
-            <span *ngIf="form.get('email')['errors']['email']">Enter a valid email.</span>
+            <span *ngIf="loginForm.get('email')['errors']['required']">Email can't by empty.</span>
+            <span *ngIf="loginForm.get('email')['errors']['email']">Enter a valid email.</span>
         </span>
     </div>
 
     <div
         class="form-group"
-        [ngClass]="{'has-error': form.get('password').invalid && form.get('password').touched}"
+        [ngClass]="{'has-error': loginForm.get('password').invalid && loginForm.get('password').touched}"
     >
         <mat-form-field class="input-password form-control">
             <input
@@ -52,13 +48,13 @@
 
         <span
             class="form-help-text"
-            *ngIf="form.get('password').invalid && form.get('password').touched"
+            *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
         >
-            <span *ngIf="form.get('password')['errors']['required']">Password can't by empty.</span>
-            <span *ngIf="form.get('password')['errors']['minlength'] && form.get('password')['errors']['minlength']['requiredLength']">
+            <span *ngIf="loginForm.get('password')['errors']['required']">Password can't by empty.</span>
+            <span *ngIf="loginForm.get('password')['errors']['minlength'] && loginForm.get('password')['errors']['minlength']['requiredLength']">
             Password must be more than 
-            {{ form.get('password')['errors']['minlength']['requiredLength'] }} 
-            characters. Now {{ form.get('password')['errors']['minlength']['actualLength'] }}.</span>
+            {{ loginForm.get('password')['errors']['minlength']['requiredLength'] }} 
+            characters. Now {{ loginForm.get('password')['errors']['minlength']['actualLength'] }}.</span>
         </span>
     </div>
 
@@ -81,7 +77,7 @@
             color="primary"
             mat-raised-button
             class="button__item button"
-            [disabled]="form.invalid"
+            [disabled]="loginForm.invalid"
         >
             Sign in
         </button>

@@ -4,16 +4,17 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { AuthModule } from './auth/auth.module';
 import { appRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthService } from './shared/services/auth.service';
+
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './_services/auth.service';
 import { SystemModule } from './system/system.module';
-import { ErrorInterceptor } from './shared/helpers/error.interceptor';
-import { CookieService } from 'ngx-cookie-service';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +27,7 @@ import { CookieService } from 'ngx-cookie-service';
   ],
   providers: [
     AuthService,
-    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

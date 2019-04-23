@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
 
-import { AuthService } from './../../shared/services/auth.service';
-import { User } from './../../shared/models/user.model';
+import { AlertService, UserService, AuthService } from '../../_services';
 
 @Component({
   selector: 'app-registration',
@@ -12,30 +12,49 @@ import { User } from './../../shared/models/user.model';
 })
 export class RegistrationComponent implements OnInit {
 
-  form: FormGroup;
+  registrationForm: FormGroup;
 
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private userService: UserService,
+    private alertService: AlertService,
+  ) {
+    // redirect to home if already logged in
+    if (this.authService.currentUserValue) {
+      this.router.navigate(['/login']);
+  }
+   }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      'name': new FormControl(null, [Validators.required, Validators.minLength(3)]),
+    this.registrationForm = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),
+      'name': new FormControl(null, [Validators.required, Validators.minLength(3)]),
       'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
       'agree': new FormControl(null, [Validators.requiredTrue])
     });
   }
 
-  onSubmit() {
-    const{ name, email, password } = this.form.value;
-    const user = new User(name, email, password);
+  // convenience getter for easy access to form fields
+  get f() { return this.registrationForm.controls; }
 
-    this.authService.createNewUser(user)
-      .subscribe(() => {
+  onSubmit() {
+
+    // stop here if form is invalid
+    if (this.registrationForm.invalid) {
+      return;
+    }
+
+    this.userService.register(this.f.email.value, this.f.name.value, this.f.password.value)
+    .pipe(first())
+    .subscribe(
+      data => {
+        this.alertService.success('Registration successful', true);
         this.router.navigate(['/login']);
-      });
+      },
+      error => {
+        this.alertService.error(error);
+      }
+    );
   }
 }
-

@@ -2,13 +2,15 @@
 
 <form 
     class="form"
-    [formGroup]="form"
+    [formGroup]="registrationForm"
     (ngSubmit)="onSubmit()"
 >
 
+    <app-alert class="message"></app-alert>
+
     <div 
         class="form-group"
-        [ngClass]="{'has-error': form.get('email').invalid && form.get('email').touched}"
+        [ngClass]="{'has-error': registrationForm.get('email').invalid && registrationForm.get('email').touched}"
 
     >
         <mat-form-field class="form-control">
@@ -23,18 +25,18 @@
 
         <span
             class="form-help-text"
-            *ngIf="form.get('email').invalid && form.get('email').touched"
+            *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched"
         >
-            <span *ngIf="form.get('email')['errors']['required']">Email can't by empty.</span>
-            <span *ngIf="form.get('email')['errors']['email']">Enter a valid email.</span>
-            <span *ngIf="form.get('email')['errors']['forbiddenEmail']">User with such email already exists.</span>
+            <span *ngIf="registrationForm.get('email')['errors']['required']">Email can't by empty.</span>
+            <span *ngIf="registrationForm.get('email')['errors']['email']">Enter a valid email.</span>
+            <span *ngIf="registrationForm.get('email')['errors']['forbiddenEmail']">User with such email already exists.</span>
         </span>
 
     </div>
 
     <div
         class="form-group"
-        [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched}"
+        [ngClass]="{'has-error': registrationForm.get('name').invalid && registrationForm.get('name').touched}"
 
     >
         <mat-form-field class="form-control">
@@ -49,16 +51,16 @@
 
         <span
             class="form-help-text"
-            *ngIf="form.get('name').invalid && form.get('name').touched"
+            *ngIf="registrationForm.get('name').invalid && registrationForm.get('name').touched"
         >
-            <span *ngIf="form.get('name')['errors']['required']">Name can't by empty.</span>
+            <span *ngIf="registrationForm.get('name')['errors']['required']">Name can't by empty.</span>
         </span>
 
     </div>
 
     <div
         class="form-group"
-        [ngClass]="{'has-error': form.get('password').invalid && form.get('password').touched}"
+        [ngClass]="{'has-error': registrationForm.get('password').invalid && registrationForm.get('password').touched}"
     >
         <mat-form-field class="form-control">
             <input 
@@ -72,20 +74,20 @@
 
         <span
             class="form-help-text"
-            *ngIf="form.get('password').invalid && form.get('password').touched"
+            *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched"
         >
-            <span *ngIf="form.get('password')['errors']['required']">Password can't by empty.</span>
-            <span *ngIf="form.get('password')['errors']['minlength'] && form.get('password')['errors']['minlength']['requiredLength']">
+            <span *ngIf="registrationForm.get('password')['errors']['required']">Password can't by empty.</span>
+            <span *ngIf="registrationForm.get('password')['errors']['minlength'] && form.get('password')['errors']['minlength']['requiredLength']">
             Password must be more than 
-            {{ form.get('password')['errors']['minlength']['requiredLength'] }} 
-            characters. Now {{ form.get('password')['errors']['minlength']['actualLength'] }}.</span>
+            {{ registrationForm.get('password')['errors']['minlength']['requiredLength'] }} 
+            characters. Now {{ registrationForm.get('password')['errors']['minlength']['actualLength'] }}.</span>
         </span>
 
     </div>
 
     <div
         class="checkbox-container form-group"
-        [ngClass]="{'has-error': form.get('agree').invalid && form.get('agree').touched}"
+        [ngClass]="{'has-error': registrationForm.get('agree').invalid && registrationForm.get('agree').touched}"
     >
         <mat-checkbox
             class="checkbox"
@@ -105,7 +107,7 @@
             color="primary"
             mat-raised-button
             class="button__item button"
-            [disabled]="form.invalid"
+            [disabled]="registrationForm.invalid"
         >
             Register
         </button>

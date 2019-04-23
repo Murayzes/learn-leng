@@ -1,3 +1,4 @@
+import { AuthGuard } from './../_guards';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -8,7 +9,7 @@ import { AboutusPageComponent } from './aboutus-page/aboutus-page.component';
 import { VideoplayerPageComponent } from './videoplayer-page/videoplayer-page.component';
 
 const routes: Routes = [
-  {path: '', component: SystemComponent, children: [
+  {path: 'system', component: SystemComponent, canActivate: [AuthGuard], children: [
     {path: 'videoplayer', component: VideoplayerPageComponent},
     {path: 'dictionary', component: DictionaryPageComponent},
     {path: 'history', component: HistoryPageComponent},
