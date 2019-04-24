@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../_models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
@@ -31,7 +34,7 @@ export class AuthService {
       }
 
       return user;
-  }));
+    }));
   }
 
   logout() {

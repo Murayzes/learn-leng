@@ -12,26 +12,29 @@
 		<a class="logo-title" [routerLink]="'/videoplayer'"><h2>Lern Leng</h2></a>
 	</div>
 
-	<div class="search">
-	
-	<div 
-	class="search-input-container"
-	[ngClass]="{'has-error': form.get('id').touched}"
+	<form 
+	class="search"
+    [formGroup]="searchForm"
+	(ngSubmit)="onSubmitSearch()"
 	>
-
-		<mat-form-field 
-		class="search-input"
+	
+		<div 
+		class="search-input-container"
 		>
-			<input
-			matInput
-			class="search-input__item"
-			type="url"
-			placeholder="Pleace, input URL"
-			formControlName="id"
-			>
-		</mat-form-field>
 
-	</div>
+			<mat-form-field 
+			class="search-input form-group"
+			>
+				<input
+				matInput
+				class="search-input__item form-control"
+				type="url"
+				placeholder="Pleace, input URL"
+				formControlName="videoLink"
+				>
+			</mat-form-field>
+
+		</div>
 
 		<button 
 		mat-fab 
@@ -40,11 +43,12 @@
 		>
 		</button>
 
-	</div>
+	</form>
 
 	<div class="user-data">
-		<h3 class="user-name">Admin</h3>
+		<h3 class="user-name">Name</h3>
 		<img class="user-avatar" src="../../assets/images/avatar.png" alt="user-avatar">
+
 		<a class="logout" (click)="logout()">
 			logout
 		</a>

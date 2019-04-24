@@ -54,6 +54,10 @@
             *ngIf="registrationForm.get('name').invalid && registrationForm.get('name').touched"
         >
             <span *ngIf="registrationForm.get('name')['errors']['required']">Name can't by empty.</span>
+            <span *ngIf="registrationForm.get('name')['errors']['minlength'] && registrationForm.get('name')['errors']['minlength']['requiredLength']">
+                Name must be more than {{ registrationForm.get('name')['errors']['minlength']['requiredLength'] }} 
+                characters. Now {{ registrationForm.get('name')['errors']['minlength']['actualLength'] }}.
+            </span>
         </span>
 
     </div>
@@ -77,10 +81,11 @@
             *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched"
         >
             <span *ngIf="registrationForm.get('password')['errors']['required']">Password can't by empty.</span>
-            <span *ngIf="registrationForm.get('password')['errors']['minlength'] && form.get('password')['errors']['minlength']['requiredLength']">
-            Password must be more than 
-            {{ registrationForm.get('password')['errors']['minlength']['requiredLength'] }} 
-            characters. Now {{ registrationForm.get('password')['errors']['minlength']['actualLength'] }}.</span>
+            <span *ngIf="registrationForm.get('password')['errors']['minlength'] && registrationForm.get('password')['errors']['minlength']['requiredLength']">
+                Password must be more than 
+                {{ registrationForm.get('password')['errors']['minlength']['requiredLength'] }} 
+                characters. Now {{ registrationForm.get('password')['errors']['minlength']['actualLength'] }}.
+            </span>
         </span>
 
     </div>

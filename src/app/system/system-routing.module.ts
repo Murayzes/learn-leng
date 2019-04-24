@@ -1,7 +1,7 @@
-import { AuthGuard } from './../_guards';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './../_guards';
 import { SystemComponent } from './system.component';
 import { DictionaryPageComponent } from './dictionary-page/dictionary-page.component';
 import { HistoryPageComponent } from './history-page/history-page.component';

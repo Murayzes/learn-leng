@@ -1,3 +1,4 @@
+import { AppComponent } from './../app.component';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -11,21 +12,26 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class SystemComponent implements OnInit {
 
   opened: boolean;
-  form: FormGroup;
+  searchForm: FormGroup;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
     this.router.navigate(['/videoplayer']);
 
-    this.form = new FormGroup({
-    id: new FormControl(null, [Validators.required]),
+    this.searchForm = new FormGroup({
+      'videoLink': new FormControl(null, [Validators.required])
     });
   }
 
   logout() {
+    this.appComponent.logout();
+  }
 
+  onSubmitSearch() {
+    console.log(this.searchForm.value);
   }
 }
