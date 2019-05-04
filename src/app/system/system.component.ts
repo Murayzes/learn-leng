@@ -1,8 +1,12 @@
-import { AppComponent } from './../app.component';
+
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { first } from 'rxjs/operators';
+
+import { SearchService } from '../_services';
+import { AppComponent } from './../app.component';
 
 @Component({
   selector: 'app-system',
@@ -16,11 +20,11 @@ export class SystemComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private searchService: SearchService,
   ) { }
 
   ngOnInit() {
-    this.router.navigate(['/videoplayer']);
 
     this.searchForm = new FormGroup({
       'videoLink': new FormControl(null, [Validators.required])
@@ -31,7 +35,21 @@ export class SystemComponent implements OnInit {
     this.appComponent.logout();
   }
 
+  get f() { return this.searchForm.controls; }
+
   onSubmitSearch() {
-    console.log(this.searchForm.value);
+
+    console.log(this.f.videoLink.value);
+
+    this.searchService.getInfo(this.f.videoLink.value)
+    .pipe(first())
+    .subscribe(
+      data => {
+        this.router.navigate(['/system/videoplayer']);
+      },
+      // error => {
+      //   this.alertService.error(error);
+      // }
+    );
   }
 }
