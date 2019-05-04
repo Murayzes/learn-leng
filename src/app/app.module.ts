@@ -8,7 +8,6 @@ import { appRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthModule } from './auth/auth.module';
-import { AuthService } from './_services/auth.service';
 import { SystemModule } from './system/system.module';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
@@ -26,7 +25,6 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     MatMenuModule,
   ],
   providers: [
-    AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
