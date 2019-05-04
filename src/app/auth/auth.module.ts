@@ -11,7 +11,7 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthRoutingModule } from './auth-routing.module';
-import { AlertComponent } from './../_components/alert.component';
+import { AlertComponent } from '../_components/alert/alert.component';
 
 @NgModule({
   declarations: [
