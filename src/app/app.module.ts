@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { SystemModule } from './system/system.module';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { PlayerComponent } from './_components';
+import { SubtitleComponent } from './_components/subtitle/subtitle.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    PlayerComponent,
+    SubtitleComponent
   ],
   bootstrap: [AppComponent],
 })

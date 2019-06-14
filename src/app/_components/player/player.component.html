@@ -1,6 +1,14 @@
-<youtube-player
-[videoId]="id"
-(ready)="savePlayer($event)"
-(change)="onStateChange($event)"
->
-</youtube-player>
+<div class="ngx-player-container">
+
+    <youtube-player
+    [videoId]="id"
+    [width]="1101"
+    [height]="750"
+    [playerVars]="subtitles"  
+    (ready)="savePlayer($event)"
+    (change)="onStateChange($event)"
+    class="ngx-player"
+    >
+    </youtube-player>
+    <button (click)="subtitle()"></button>
+</div>
