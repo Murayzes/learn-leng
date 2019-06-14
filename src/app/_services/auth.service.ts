@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    return this.http.post<any>(`https://topvideoplayer.herokuapp.com/api/users/auth`, { email, password })
+    return this.http.post<any>(`https://videoplayerlatest.herokuapp.com/api/users/auth`, { email, password })
     .pipe(map(user => {
       // login successful if there's a jwt token in the response
       if (user && user.token_refresh) {
@@ -39,6 +39,7 @@ export class AuthService {
 
   logout() {
     // remove user from local storage to log user out
+    this.http.post<any>(`https://videoplayerlatest.herokuapp.com/api/users/logout`, {});
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
