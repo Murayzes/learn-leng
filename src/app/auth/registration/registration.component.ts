@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { AlertService, UserService, AuthService } from '../../_services';
+import { AlertService, RegisterService, AuthService } from '../../_services';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +17,7 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private userService: UserService,
+    private registerService: RegisterService,
     private alertService: AlertService,
   ) {
     // redirect to home if already logged in
@@ -45,7 +45,7 @@ export class RegistrationComponent implements OnInit {
       return;
     }
 
-    this.userService.register(this.f.email.value, this.f.name.value, this.f.password.value)
+    this.registerService.register(this.f.email.value, this.f.name.value, this.f.password.value)
     .pipe(first())
     .subscribe(
       data => {

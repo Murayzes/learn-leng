@@ -1,4 +1,3 @@
-
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -27,7 +26,7 @@ export class SystemComponent implements OnInit {
   ngOnInit() {
 
     this.searchForm = new FormGroup({
-      'videoLink': new FormControl(null, [Validators.required])
+      'videoLink': new FormControl((null || JSON.parse(localStorage.getItem('currentLinkVideo'))), [Validators.required])
     });
   }
 
@@ -39,17 +38,14 @@ export class SystemComponent implements OnInit {
 
   onSubmitSearch() {
 
-    console.log(this.f.videoLink.value);
-
     this.searchService.getInfo(this.f.videoLink.value)
     .pipe(first())
     .subscribe(
       data => {
         this.router.navigate(['/system/videoplayer']);
-      },
-      // error => {
-      //   this.alertService.error(error);
-      // }
+        localStorage.setItem('currentIdVideo', JSON.stringify(data['video_identifier']));
+        localStorage.setItem('currentLinkVideo', JSON.stringify(this.f.videoLink.value));
+      }
     );
   }
 }
